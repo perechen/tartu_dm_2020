@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to Stylometry</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Artjoms Šeļa @artjomshl" />
+    <meta name="date" content="2020-08-20" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding/plotly.js"></script>
+    <script src="libs/typedarray/typedarray.min.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main/plotly-latest.min.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link rel="stylesheet" href="metropolis_branch.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Stylometry
+## Digital Methods in Humanities and Social Sciences <br> August 24-27, 2020, Tartu
+### </br>Artjoms Šeļa <span class="citation">@artjomshl</span>
+### Institute of Polish Language (PAN, Krakow) / University of Tartu
+### 2020-08-20
+
+---
+
+
+class: inverse, center, middle
+
+# Differences &amp; Similarities
+
+---
+
+# How different?
+
+.center[![](pics/1_1.png)]
+
+
+
+
+---
+
+# Think in terms of distances
+
+.center[![](pics/1_1.png)]
+
+.footnote[
+
+What evolutionary path each species has undergone?
+
+]
+
+
+
+---
+
+# Think in terms of distances
+
+.center[![](pics/2_2.png)]
+
+.footnote[
+
+What evolutionary path each species has undergone?
+
+]
+
+---
+
+# What about texts?
+
+.center[![](pics/3_1.png)]
+
+.footnote[
+
+Continue thinking in **distances**
+
+]
+
+---
+
+# Zoom in
+
+.center[![](pics/4_1.png)]
+
+.footnote[
+
+Continue thinking in **distances**
+
+
+]
+
+---
+
+# A twist
+
+
+.center[![](pics/5_1.png)]
+
+.footnote[
+
+Continue thinking in **distances**  
+
+One of the fundamental assumptions of authorship attribution: two texts of one author share more similarities to each other than to any other "outsider" text
+
+
+]
+
+---
+
+# Distances on a 2D plane
+
+.center[![](pics/6_1.png)]
+
+.footnote[
+
+Let's abandon the tree metaphor for now
+
+
+]
+
+---
+
+# Distances on a 3D plane
+
+.center[![](pics/7_1.png)]
+
+.footnote[
+
+3 dimensions give us even more information on text relationships
+
+
+]
+
+---
+
+# Real Christie &amp; Doyle
+
+.center[
+<div align="center">
+<div id="htmlwidget-86e32e0ee03223e4ffb4" style="width:100%;height:400px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-86e32e0ee03223e4ffb4">{"x":{"visdat":{"15e255535e30":["function () ","plotlyVisDat"]},"cur_data":"15e255535e30","attrs":{"15e255535e30":{"x":{},"y":{},"z":{},"text":["Christie_1926_TheMurderOfRogerAckroyd","Christie_1930_TheMurderAtTheVicarage","Christie_1934_MurderOnTheOrientExpress","Christie_1937_DeathOnTheNile","Doyle_1902_HoundOfTheBaskervilles","Doyle_1905_TheReturnOfSherlockHolmes","Doyle_1915_TheValleyOfFear","Doyle_1917_HisLastBow"],"hoverinfo":{},"colors":"Set1","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","color":{},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"the"},"yaxis":{"title":"is"},"zaxis":{"title":"of"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[0.045973249857712,0.041705770269886,0.0534680861833336,0.0395859560777731],"y":[0.00845190665907797,0.00786337912009783,0.0130084867299938,0.00939737280484238],"z":[0.0200341491178145,0.0192105337997327,0.0202635441799254,0.0188710436297511],"text":["Christie_1926_TheMurderOfRogerAckroyd","Christie_1930_TheMurderAtTheVicarage","Christie_1934_MurderOnTheOrientExpress","Christie_1937_DeathOnTheNile"],"hoverinfo":["Christie_1926_TheMurderOfRogerAckroyd","Christie_1930_TheMurderAtTheVicarage","Christie_1934_MurderOnTheOrientExpress","Christie_1937_DeathOnTheNile"],"type":"scatter3d","mode":"markers","name":"Christie_","marker":{"color":"rgba(228,26,28,1)","line":{"color":"rgba(228,26,28,1)"}},"textfont":{"color":"rgba(228,26,28,1)"},"error_y":{"color":"rgba(228,26,28,1)"},"error_x":{"color":"rgba(228,26,28,1)"},"line":{"color":"rgba(228,26,28,1)"},"frame":null},{"x":[0.0557220092730529,0.0553433442554012,0.0560529255090643,0.0547409579667644],"y":[0.0104447382956999,0.00989994918610152,0.00881519030844574,0.0114043662430759],"z":[0.0266642117068108,0.0247498729652538,0.0247443938482688,0.0221570544151189],"text":["Doyle_1902_HoundOfTheBaskervilles","Doyle_1905_TheReturnOfSherlockHolmes","Doyle_1915_TheValleyOfFear","Doyle_1917_HisLastBow"],"hoverinfo":["Doyle_1902_HoundOfTheBaskervilles","Doyle_1905_TheReturnOfSherlockHolmes","Doyle_1915_TheValleyOfFear","Doyle_1917_HisLastBow"],"type":"scatter3d","mode":"markers","name":"Doyle_","marker":{"color":"rgba(55,126,184,1)","line":{"color":"rgba(55,126,184,1)"}},"textfont":{"color":"rgba(55,126,184,1)"},"error_y":{"color":"rgba(55,126,184,1)"},"error_x":{"color":"rgba(55,126,184,1)"},"line":{"color":"rgba(55,126,184,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+]
+
+.footnote[
+
+Real-world data broadly confirm expectations. We are using only three words here!
+
+
+]
+
+---
+
+# A continuous space of everything
+
+.footnote[
+
+[Every Noise at once](http://everynoise.com/)
+
+]
+
+.center[![](pics/everyplane.png)]
+
+
+---
+
+# Stylometry as a discipline
+
+Stylometry tries to address the questions of style differences in a quantitative way  
+
+--
+
+- A “style” in this sense is some set of **quantifiable textual features** that show **variation across texts**
+
+--
+
+- Many features were proposed: word lengths, sentence lengths, word frequencies, character n-grams, part-of-speech tags, versification features like rhythm and rhyme patterns…
+
+--
+
+- Authorship attribution is a sub-problem of stylometry: **how unique patterns of textual features help to catch author identity**
+
+---
+
+class: inverse, middle, center
+
+# Fingerprints &amp; Hydrogen:&lt;br&gt; brief conceptual history of Western stylometry
+
+---
+
+# Three main branches
+
+- **Shakespeare branch.** 1800s-1870s. Gentlemen studying Shakespeare (**New Shakespere Society**). First use of rhyme features to determine authorship (John Kells). Early beginnings: Edmond Malone, Henry Weber, James Spedding.
+
+--
+
+- **Plato philosophers branch** Late 19th century. Dating Dialogues of Plato. Two schools unaware of each other: German &amp; **W. Lutosławski** + Scottish &amp; Lewis Campbell. Focus on few function words.
+
+--
+
+- **American math branch (the most known)**. Late 19th century. Augustus de Morgan -&gt; W.B. Smith -&gt; T.C. Mendenhall. Search for the "Golden feature". Eventually led to Yule's works and famous Mosteller &amp; Wallace (1964) study on *Federalist Papers*
+
+---
+
+# Mendenhall: Curves of composition
+
+
+.middle[![](pics/curves.png)]
+
+.footnote[
+
+Mendenhall proposed to look at distribution of length of words in a text. Resulting curves were metaphorically compared to the "light specter" of elements. So authors = chemical elements.
+
+]
+
+---
+# Giovanni Morelli: what makes a painter unique?
+
+.center[![](pics/morelli.jpg) ![](pics/morelli2.jpg)]
+
+.footnote[
+
+Morelli published as Ivan Lermollieff: series of articles in 1874-1876 *Zeitschrift für bildende Kunst* 
+
+see **C. Ginzburg.** *Clues: Roots of Evidential Paradigm*
+
+]
+
+---
+
+# Positivism origins of stylometric thinking
+
+Early thinking in authorship attribution was developing under the forensic, positivist discourse of late 19th century. Advances in identification and criminal science shaped the quest of "Golden feature" for attribution:  
+
+- **Abundance.** It should be present in every text (e.g. word-length);
+- **Variability.** It should have high variation across individual authors
+- **Invisibility.** Resistance to conscious alternation / tweaking (it's kind of hard to control function words that you have habit to use)
+
+---
+class: inverse, middle, center
+
+# Distances: A Walkthrough
+
+
+
+---
+
+
+# Distances between texts: Burrow's Delta (2002)
+
+.pull-left[
+- John Burrows proposed a "Delta" measure in 2002;
+- Most frequent words as a feature;
+- **Multivariate** thinking: many features contribute to authorial signal simultaneously;
+- Metric was based on **pair-wise differences in word frequencies between two texts**.
+- Though word frequency is tricky! Let's unwrap it
+
+
+]  
+
+.pull-right[
+
+.center[![](pics/burrows.png)]
+
+`$$\Delta(x, y)= \frac{\sum_{i=1}^n|z(x_i) - z(y_i)|}{n}$$`
+]
+
+
+
+---
+
+# The curse of Zipf's law
+
+If you count words in a large enough text and then look at how the frequencies are distributed, you'll notice **an enormous inequality**. It's known as Zip's law (or Paretto distribution, power-law distribution etc.)
+
+.center[![](pics/8_1.png)]
+
+---
+
+# How to make rare words noticable
+
+Since frequencies of words are quickly decaying when you move from the most frequent ones, their contribution to Delta also decreases dramatically. To overcome the Zipf's curse a **standartization is implemented** (calculating z-scores). Compare this:
+
+
+.center[![](pics/9_1.png)]
+
+---
+
+# Standartization &amp; context-dependance
+
+Z-scores express **how a word in a given text deviates from the mean frequency of this word** in observed corpus
+
+`$$z(x_w) = \frac{x_w - \mu(w)}{\sigma(w)}$$`
+Where:
+- `\(\mu(w)\)` is a mean frequency of a word in corpus;  
+- `\(\sigma(w)\)` is a standard deviation of a word in corpus
+
+---
+
+# Real-world data (relative freq. vs. z-scores)
+
+.pull-left[
+&lt;table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; text_title &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; the &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; is &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; of &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Christie1926 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.046 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.008 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.020 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Christie1930 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.042 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.008 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.019 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Christie1934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.053 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.013 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.020 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Christie1937 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.040 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.009 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.019 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Doyle1902 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.056 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.027 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Doyle1905 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.055 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.025 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Doyle1915 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.056 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.009 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.025 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Doyle1917 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.055 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+&lt;table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; the &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; is &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; of &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.638&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.865&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.694&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-1.265&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-1.214&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.972&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.461&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;1.837&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.616&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-1.576&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.304&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-1.087&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.792&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.317&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;1.547&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.737&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.006&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.9&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.841&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;"&gt;-0.65&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.898&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.648&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.886&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: black !important;"&gt;0.024&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+]
+
+---
+
+background-image: url(pics/plehac.jpg)
+background-size: 150px
+background-position: 95% 10%
+
+# Geometric meaning of distances
+
+.middle[
+- [Geometric explanation](http://versologie.cz/talks/2017chicago/)
+
+- by Petr Plecháč (Czech Academy of Sciences)
+]
+
+![](pics/delta.png)
+
+
+---
+
+background-image: url(pics/plehac.jpg)
+background-size: 150px
+background-position: 95% 10%
+
+# Geometric meaning of distances
+
+.middle[
+- [Geometric explanation](http://versologie.cz/talks/2017chicago/)
+
+- by Petr Plecháč (Czech Academy of Sciences)
+]
+
+![](pics/cosine.png)
+
+
+
+---
+
+# Not only a fingerprint
+
+Words redundantly convey many levels of information beyond authorship (time, genre, type of text, narrative form etc.)
+
+.center[![](pics/chrono2.png)]
+.footnote[
+Rybicky 2016
+]
+---
+
+# Not only a fingerprint
+
+Words redundantly convey many levels of information beyond authorship (time, genre, type of text, narrative form etc.)
+
+.center[![](pics/chrono1.png)]
+.footnote[
+Rybicky 2016
+]
+---
+
+# Identity is not neutral
+
+- Language provides enough variability for largely unconscious and unique patterns of writing
+**We are constantly “emanating” our fingerprint** and not only through natural languages
+
+- Chat rooms (Inches et al. 2013), programming code, even texts written in artificial languages (elven, dothraki, klingon) exhibit strong-enough authorial signal to figure out probable authors
+
+- Machines should be made not only **to reveal** authorial signal, but also **to conceal** it. 
+
+---
+
+# "stylo" package for R
+
+![](pics/eder.jpg) ![](pics/rybicki.jpg) ![](pics/kestemont.jpg)
+
+**Eder, M., Rybicki, J. and Kestemont, M.** (2016). 
+Stylometry with R: a package for computational text analysis. R Journal 8(1): 107-121.
+
+---
+
+# Some resources (corpora)
+
+From stylo guys: https://computationalstylistics.github.io/resources/  
+**English, Latin, Russian, Italian, Shakespeare etc.**
+
+.txtLab **Novel450** dataset: https://txtlab.org/data-sets/  
+**150 ger, 150 fr, 150 eng**
+
+---
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+background-size: 100px
+background-position: 50% 8%
+
+class: center, middle
+
+Thanks!  
+
+Slides created via the Yihui Xie's R package [**xaringan**](https://github.com/yihui/xaringan).
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.org/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
