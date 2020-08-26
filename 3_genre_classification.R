@@ -45,7 +45,6 @@ corpus
 rank = corpus %>%
   #tokenize by word -> new column "word" out of column "text"
   unnest_tokens(input = text, output = word, token = "words") %>%
-  mutate(word=str_remove(word, "'")) %>% 
   #count & sort
   count(word, sort = T) %>% 
   select(-n) %>% 
@@ -56,8 +55,7 @@ rank = corpus %>%
  
 freqs = corpus %>%
   unnest_tokens(input = text, output = word, token = "words") %>%
-  mutate(word=str_remove(word, "'")) %>% 
-  right_join(rank,by="word") %>% 
+  right_join(rank,by="word") %>% # we are leaving 5000 MFWs that we cut-off earlier 
   count(title, word) %>% # count words within each text
   group_by(title) %>%
   mutate(n = n/sum(n)) %>% # because of group_by() will sum word counts only within titles -> we get relative frequencies
@@ -69,7 +67,7 @@ freqs = corpus %>%
 freqs[1:10,1:15]
 
 ## scale desired amount of MFWs
-z = freqs[,2:11] %>% as.matrix() %>% scale() %>% as_tibble()
+z = freqs[,102:201] %>% as.matrix() %>% scale() %>% as_tibble()
 
 ## combine it back with titles
 z_fin = freqs[,1] %>% 
@@ -93,7 +91,6 @@ z_fin$text_genre %>% table()
 ## deal with disproportionate genres
 
 n = min(table(z_fin$text_genre)) # what is the value of the less frequent class
-
 ## in what proportion split to training and test sets (roughly 60% of texts will go to training)
 train_size = round(n*0.60)
 test_size = n - train_size
@@ -101,12 +98,14 @@ test_size = n - train_size
 
 train_set = z_fin %>%
   group_by(text_genre) %>%
-  sample_n(train_size) # sample n times per each group (genre) 
+  sample_n(train_size) %>% # sample n times per each group (genre) 
+  ungroup() 
 
 test_set = z_fin %>% 
   anti_join(train_set, by="text_id") %>% # 1. remove already sampled training set from the data
   group_by(text_genre) %>% 
-  sample_n(test_size)  # 2. sample again the test per each genre
+  sample_n(test_size) %>% # 2. sample again the test per each genre
+  ungroup() 
 
 
 ### fit SVM model
@@ -121,17 +120,21 @@ svm_model <-svm(as.factor(text_genre)~.,  # we try to predict genre with all wor
 ### check summary
 summary(svm_model)
 
-### compute features weights (multiply coefficients by support vectors distances to features)
+### compute features weights using slopes of vectors and Support Vector alignment to features
+
 w = t(svm_model$coefs) %*% svm_model$SV
 
 tibble(weight=w[1,], word=colnames(w)) %>% 
-  mutate(genre = case_when(weight > 0 ~ "Comedie",
+  mutate(genre = case_when(weight > 0 ~ "Comedie", # label weights
                            weight < 0 ~ "Tragedie")) %>%
-  group_by(genre) %>% mutate(abs=abs(weight)) %>%
+  group_by(genre) %>% 
+  mutate(abs=abs(weight)) %>%
   top_n(20,abs) %>% 
   ggplot(aes(reorder(word,abs),abs,fill=genre)) + geom_col() +
   coord_flip() + 
-  facet_wrap(~genre,scales="free")
+  facet_wrap(~genre,scales="free") +
+  theme(axis.text.y = element_text(size=14))
+
 
 ### now predict classes from unseen test set with the model we have
 
@@ -210,6 +213,8 @@ genre_metrics = collect_metrics(genre_svm_resamp)
 # predictions
 genre_pred = collect_predictions(genre_svm_resamp)
 
+# check accuracy
+genre_metrics
 
 ## confusion matrix
 genre_pred %>%
@@ -225,7 +230,7 @@ final_res <- genre_svm_wf %>%
 genre_metrics_fin = collect_metrics(final_res)
 genre_pred_fin = collect_predictions(final_res)
 
-
+genre_metrics_fin
 ## what are misclassifications?
 misclass =genre_pred_fin %>% filter(genre != .pred_class) %>% pull(.row)
 

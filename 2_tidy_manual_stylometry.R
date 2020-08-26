@@ -13,7 +13,7 @@ library(ggdendro)
 ############ INPUT DATA
 
 ### list all files in the folder with your corpus
-files = list.files("corpus/", full.names = T)
+files = list.files("corpus", full.names = T)
 files
 
 ### combine titles and texts as LONG strings
@@ -34,7 +34,6 @@ rank = corpus %>%
   count(word, sort = T)
 
 
-
 ### tokenize corpus, count frequencies in each document, compute relative frequencies, spread to matrix-like format
 
 freqs = corpus %>%
@@ -42,7 +41,8 @@ freqs = corpus %>%
   count(title, word) %>% # count words within each text
   group_by(title) %>%
   mutate(n = n/sum(n)) %>% # because of group_by() will sum word counts only within titles -> we get relative frequencies
-  rename(text_title = title) %>%
+  ungroup() %>% 
+  rename(text_title = title) %>% 
   mutate(word = factor(word, levels = rank$word)) %>% #reorder words by their rank so in the long format they would appear in desired order
   spread(key="word", value="n", fill = 0)
 
@@ -61,12 +61,11 @@ z_freqs[1:5,1:10]
 
 ### now when we have z-scored Document-Term Matrix, we can proceed to calculate distances
 
-### Classic delta (with my ugly function)
-manual_delta = burrows.delta(z_freqs, 400)
-### The same thing!
-delta = dist(z_freqs[,1:400],method = "manhattan", diag=T,upper=T)/400
+mfw=400 # set desired number of MFWs
 
+delta = dist(z_freqs[,1:mfw],method = "manhattan", diag=T,upper=T)/mfw
 
+as.matrix(delta)[1:3,1:3]
 
 ### cluster by Ward's method (minimize divergence between clusters)
 
@@ -83,12 +82,12 @@ ggdendrogram(clusters,rotate=T)
 ## first prepare a ggdendro object
 ggclust = dendro_data(clusters)
 
-## then modify the table of labels within "ggclust$labels"
-ggclust$labels
+#### then modify the table of labels within "ggclust$labels"
+ggclust$labels # looks tidy!
 ggclust$labels = ggclust$labels %>%
-  separate(label, c("author", "title", "year"), sep="_") %>%
-  mutate(label = paste(author, title, year, sep="_"))
+  mutate(author = str_replace(label, "^(.*?)_.*", "\\1")) #extract all characters before the first underscore (= author)
 
+ggclust$labels
 # plot: segments & labels as separate geometry
 ### Don't worry, its less intimidating than it looks!
 ggplot() + 
@@ -96,4 +95,5 @@ ggplot() +
   geom_text(data=ggclust$labels, aes(x,y,label=label, color=author), hjust=1, angle=0, size=4) +
   coord_flip() + 
   scale_y_continuous(expand=c(1, 0)) + 
-  theme_dendro()
+  theme_dendro() +
+  guides(color=F)
