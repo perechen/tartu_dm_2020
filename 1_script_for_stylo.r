@@ -1,11 +1,3 @@
-######## ONLY RUN THIS IF YOU ARE ON UNIVERSITY COMPUTER ###############
-########################################################################
-dir.create("C:/Users/YOUR_ACCOUNT_NAME/Documents/Rlibs")
-.libPaths("C:/Users/YOUR_ACCOUNT_NAME/Documents/Rlibs")
-# change YOUR_ACCOUNT_NAME/Documents/Rlibs with your UT username
-
-############ END ######################################################
-#######################################################################
 
 ### 0. brief intro to R
 
@@ -54,7 +46,7 @@ stylo()
 
 ### 4. Reading output tables back to R
 
-dist = read.table("distance_table_100mfw_80c.txt", sep=" ")
+dist = read.table("distance_table_100mfw_0c.txt", sep=" ")
 word = read.table("table_with_frequencies.txt", sep=" ")
 
 ### 5. Saving results to R directly
