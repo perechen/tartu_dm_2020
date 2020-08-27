@@ -28,7 +28,7 @@ my_table = data.frame(animals = c("cat", "cat", "dog"),
 
 my_table
 my_table$animals # use $ to access columns in a data frame
-my_table$animels[1] # first element of column "animals"
+my_table$animals[1] # first element of column "animals"
 my_table[1,] # access first row with all columns
 my_table[1,2] # access value of first row and second column
 my_table[,"evaluation"] # access columns by their names
