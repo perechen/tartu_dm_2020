@@ -16,7 +16,7 @@ chr = "this is a string"
 chr
 # functions 
 my_vector = c(2,5,6) # combine values in a vector
-mean(vector) # average function
+mean(my_vector) # average function
 seq(0, 100, by=10) # make a sequence of numbers
 paste(chr, "and this will apear to the left", sep=" ") # paste strings together
 # object indexing
